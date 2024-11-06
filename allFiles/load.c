@@ -1,19 +1,21 @@
 #include<stdio.h>
 #include<stdlib.h>
-
-int load(char *fileName, char *memory){
+#include<string.h>
+int load(char *fileName, char memory[32][9]){
     int i = 0;
-    char text[8];
+    char text[9];
     FILE *fp = fopen(fileName, "rb");
     if (fp == NULL) {
         perror("Error opening file");
         return 1;
     }
     while (fgets(text,sizeof(text),fp)){
-        memory[i] = text;
+        if(text[0] == '\n') continue;
+        strcpy(memory[i],text);
+        printf("Mem[%d] = %s\n", i, memory[i]);
         i++;
     } 
-    printf("Number of instructions is: %d",i);
+
     fclose(fp);
     return i;
 }
