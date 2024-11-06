@@ -6,8 +6,8 @@ FILENAME = fibonacci.bin
 run: build/sim
 	cd build && ./sim ../$(FILENAME)
 
-all: createDR simulator.o load.o decoder.o immediate.o Mux.o ALU.o jump.o
-	cd build && $(CC) -o sim simulator.o load.o decoder.o immediate.o Mux.o ALU.o jump.o
+all: createDR simulator.o load.o decoder.o immediate.o Mux.o ALU.o jump.o fetch.o
+	cd build && $(CC) -o sim simulator.o load.o decoder.o immediate.o Mux.o ALU.o jump.o fetch.o
 
 simulator.o: simulator.c
 	cd build && $(CC) $(CFLAG) ../simulator.c
@@ -29,6 +29,9 @@ ALU.o: allFiles/ALU.c
 
 jump.o: allFiles/jump.c
 	cd build && $(CC) $(CFLAG) ../allFiles/jump.c
+
+fetch.o: allFiles/fetch.c
+	cd build && $(CC) $(CFLAG) ../allFiles/fetch.c
 
 createDR:
 	mkdir -p build

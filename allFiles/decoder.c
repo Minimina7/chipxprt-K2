@@ -1,9 +1,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-void decoder(char memory[32][9], char *j, char *c, char *D1,char *D0, char *Sreg ,char *S, char *imm1, char *imm0, int counter){
+void decoder(char byte, char *j, char *c, char *D1,char *D0, char *Sreg ,char *S, char *imm1, char *imm0){
     //char text = memory[counter];
-    char byte = (char)strtol(memory[counter], NULL, 2);
+    //char byte = (char)strtol(instruction, NULL, 2);
     *j = (byte >> 7) & 1;
     *c = (byte >> 6) & 1;
     *D1 = (byte >> 5) & 1;
