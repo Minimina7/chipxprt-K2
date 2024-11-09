@@ -55,10 +55,15 @@ char* convbin(char *instruction, int *flag) {
 }
 
 
-void assembler_function() {
+void assembler_function(char *fileName) {
     int flag = 0;
-    FILE *input_file = fopen("fibonacci.asm", "r");
-    FILE *output_file = fopen("fibonacci.bin", "w");
+    char inputFileName[100];
+    char outputFileName[100];
+
+    sprintf(inputFileName, "%s.asm", fileName);
+    sprintf(outputFileName, "%s.bin", fileName);
+    FILE *input_file = fopen(inputFileName, "r");
+    FILE *output_file = fopen(outputFileName, "w");
 
     if (input_file == NULL) {
         printf("Error: The input file could not be opened.\n");
@@ -107,8 +112,13 @@ void assembler_function() {
     fclose(output_file);
 }
 
-int main() {
-    assembler_function();
+int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        printf("you did't entered input in command prompt!!\n");
+        return 1;
+    }
+
+    assembler_function(argv[1]);
     return 0;
 }
 

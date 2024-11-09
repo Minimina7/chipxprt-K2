@@ -1,5 +1,5 @@
-RA   =  7      
-RB=                         9      
+RA   =  0      
+RB=                         1      
 R0   =   R  A
      
 RB=RA + R  B  

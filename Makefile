@@ -4,12 +4,12 @@ FILENAME = fibonacci
 
 
 run: build/sim
-	cd build && ./assembler ../$(FILENAME.asm)
-	cd build && ./sim ../$(FILENAME.bin)
+	cd build && ./assembler ../$(FILENAME)
+	cd build && ./sim ../$(FILENAME)
 
 all: createDR simulator.o load.o decoder.o immediate.o Mux.o ALU.o jump.o fetch.o
 	cd build && $(CC) -o sim simulator.o load.o decoder.o immediate.o Mux.o ALU.o jump.o fetch.o
-	cd build && $(CC) -o assembler convbin_code.c
+	cd build && $(CC) -o assembler ../convbin_code.c
 
 %.o: %.c
 	cd build && $(CC) $(CFLAG) ../$<
