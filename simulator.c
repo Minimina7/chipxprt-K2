@@ -38,12 +38,6 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    // FILE *fp = fopen(argv[1], "rb");
-    // if (fp == NULL) {
-    //     perror("Error opening file");
-    //     return 1;
-    // }
-    
     printf("Select one of the following mode\nR - Run in continuous mode\nS - Run step-by-step\nSelect mode: ");
     scanf(" %c", &choice);
     while (choice != 'R' && choice != 'r' && choice != 'S' && choice != 's'){
@@ -59,34 +53,29 @@ int main(int argc, char *argv[]) {
     for(PC; PC <= instructions ; PC++){
         cureentInstruction = ftech(memory,PC);
         decoder(cureentInstruction, &j, &c, &D1, &D0, &Sreg, &S, &imm1, &imm0);
-        //printf("decoder is working\n");
         immediateValue = immediate(S, imm1, imm0);
-        //PC = jump(j, c, flagC, immediateValue, PC);
-        //printf("immediateValue is working\n");
         sum = ALU(S, regA, regB ,&flagC);
         value = mux(Sreg , immediateValue, sum);
-        //printf("mux is working\n");
+
         if(D1 == 0 && D0 == 0){
             regA = value;
         }
         if(D1 == 0 && D0 == 1){
             regB = value;
         }
-        //printf("ALU is working\n");
         if(D1 == 1 && D0 == 0){
             regZ = regA;
             printf("R0 = %d\n", regZ);
         }
-        //printf("R0 is working\n");
-        //printf("jump is working\n");
-        //printf("RA = %d\n", regA);
-        //printf("RB = %d\n", regB);
+
         PC = jump(j, c, carry_Reg, immediateValue, PC);
         usleep(15000);
 
         carry_Reg = flagC;
 
         if(choice == 'S' || choice == 's'){
+            printf("RA = %d\n", regA);
+            printf("RB = %d\n", regB);
             printf("The code excuted the follwoing instrcution: %d%d%d%d%d%d%d%d\n",j,c,D1,D0,Sreg,S,imm1,imm0);
             printf("Please press S to continue: ");
             scanf(" %c",&choice);
