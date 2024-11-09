@@ -14,7 +14,7 @@ void decoder(char *lines , int counter, char *j, char *c, char *D1,char *D0, cha
     }
 
 int main(int argc, char *argv[]) {
-    char lines[16];
+    char lines[8];
     char j = 0;
     char c = 0;
     char D1 = 0;
@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    while (fgets(lines,16,fp)){
+    while (fgets(lines,sizeof(lines),fp)){
         if(lines == '\n')
             continue;
         printf("Read it from the file\n");
