@@ -4,11 +4,11 @@
 
 char line[100], new_line[100];
 
-// Converting an instruction to binary 
+ 
 char* convbin(char *instruction, int *flag) {
     static char x[9];
 
-    // The binary codes for each instruction
+    
     if (strcmp(instruction, "RA=RA+RB") == 0) strcpy(x, "00000000");
     else if (strcmp(instruction, "RB=RA+RB") == 0) strcpy(x, "00010000");
     else if (strcmp(instruction, "RA=RA-RB") == 0) strcpy(x, "00000100");
@@ -54,7 +54,7 @@ char* convbin(char *instruction, int *flag) {
 	
 }
 
-// Reading and Writing the assembler files
+
 void assembler_function() {
     int flag = 0;
     FILE *input_file = fopen("fibonacci.asm", "r");
@@ -76,7 +76,7 @@ void assembler_function() {
        	if (line[0] == ' '|| line[0] == '\n')
 		continue;
 
-	// Convert each character to uppercase and remove spaces and newlines
+	
         for (int i = 0; line[i] != '\0'; i++) {
             if (line[i] != '\n' && line[i] != ' ' && line[i] != '\t') {
                 new_line[j++] = toupper(line[i]);
@@ -86,12 +86,20 @@ void assembler_function() {
 		printf("There is error in line %d\n",j);
 	}
 */
-        new_line[j] = '\0'; // Null-terminate the string
+        new_line[j] = '\0'; 
 
-        // Convert the instruction to binary and write it to the output file
+        
         char *bin = convbin(new_line, &flag);
 	
-        fprintf(output_file, "%s\n", bin);
+	if (strcmp(bin, "11111111") == 0) {
+            printf("Error: Invalid instruction in line: %s", line);
+        } else {
+            
+            fprintf(output_file, "%s\n", bin);
+        }	
+
+
+       // fprintf(output_file, "%s\n", bin);
 	
     }
 
